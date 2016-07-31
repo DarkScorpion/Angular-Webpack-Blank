@@ -1,0 +1,23 @@
+{
+  "name": "ng-webpack",
+  "version": "0.0.1",
+  "description": "",
+  "main": "",
+  "dependencies": {
+    "angular": "^1.5.8"
+    
+  },
+  "devDependencies": {
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server",
+    "deploy": "webpack --deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Smith <iqwz@ya.ru>",
+  "license": "ISC"
+}
