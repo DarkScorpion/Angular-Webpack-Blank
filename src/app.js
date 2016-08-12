@@ -1,9 +1,14 @@
 
 var angular = require('angular');
+var uiRouter = require('angular-ui-router');
 
-var app = angular.module('app', []);
+var uiRouterConfig = require('./uiRouterConfig.js');
 
-app.controller('mainCtrl', function($scope) {
+var app = angular.module('app', [uiRouter]).config(uiRouterConfig);
+
+/*
+app.controller('mainCtrl', ($scope) => {
   
-  $scope.hello = 'Hello All!';
+  $scope.hello = 'Hello All!__!';
 });
+*/

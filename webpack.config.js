@@ -40,6 +40,13 @@ module.exports = {
     }, {
       test: /\.styl?$/,
       loader: 'style!css!stylus',
+    }, {
+      test: /\.(html)?$/,
+      loader: 'file',
+      include: path.join(__dirname, "/src/views/"),
+      query: {
+        name: 'views/[name].[ext]'
+      }
     }]
   },
 
