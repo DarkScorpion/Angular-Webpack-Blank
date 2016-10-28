@@ -14,7 +14,10 @@ var devPlagins = [
   new webpack.HotModuleReplacementPlugin(),
 ];
 var deployPlagins = [
-  new webpack.optimize.UglifyJsPlugin({ compress: {warnings: false} })
+  new webpack.optimize.UglifyJsPlugin({
+    mangle: false,
+    compress: {warnings: false}
+  })
 ];
 
 module.exports = {
