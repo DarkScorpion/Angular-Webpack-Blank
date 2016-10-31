@@ -1,0 +1,9 @@
+<div>
+  <label for="actionPriority">Chose you food</label>
+  <select ng-model="food">
+    <option ng-repeat="item in foodData" value="{{ item.url }}">{{ item.name }}</option>
+  </select>
+  <div class="image-test">
+    <img ng-src="{{food}}" />
+  </div>
+</div>

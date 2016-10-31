@@ -1,4 +1,4 @@
 
 module.exports = function ($scope) {
-  $scope.hello = 'Hello HOME route =)';
+  $scope.hello = 'HOME route =)';
 }

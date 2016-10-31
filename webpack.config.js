@@ -1,7 +1,7 @@
 
 var isDeploy = isArgs('--deploy');
 
-var path = require('path');
+var join = require('path').join;
 var webpack = require('webpack');
 var typeOf = require('./modules/typeOf.js');
 
@@ -22,11 +22,11 @@ var deployPlagins = [
 
 module.exports = {
   entry: setEntrySources([
-    path.join(__dirname, '/src/app.js')
+    join(__dirname, '/src/app.js')
   ]),
   output: {
-    path: path.join(__dirname, '/build'),
     filename: 'app.js',
+    path: join(__dirname, '/build/'),
     publicPath: '/build/'
   },
 
@@ -36,7 +36,7 @@ module.exports = {
     loaders: [{
       test: /\.js?$/,
       loader: 'babel',
-      include: path.join(__dirname, "/src"),
+      include: join(__dirname, "/src/"),
       query: {
         presets: [] //['es2015']
       }
@@ -46,14 +46,20 @@ module.exports = {
     }, {
       test: /\.(html)?$/,
       loader: 'file',
-      include: path.join(__dirname, "/src/views/"),
+      include: join(__dirname, "/src/views/"),
       query: {
         name: 'views/[name].[ext]'
       }
+    }, {
+      test: /\.(png|jpg)?$/,
+      loader: 'file',
+      include: join(__dirname, "/src/images/"),
+      query: {
+        name: 'images/[name].[ext]'
+      }
     }]
   },
-
-  //devtool: isDeploy ? null : 'eval',
+  
 };
 
 function isArgs(str) {
@@ -61,28 +67,27 @@ function isArgs(str) {
 }
 
 function setEntrySources(sources) {
-  if(!isDeploy) {
-    var devClientPath = 'webpack-dev-server/client';
-    switch( typeOf(sources) ) {
-    case('object'):
-      var tempObj = {};
-      for(var key in sources) {
-        tempObj[key] = setEntrySources(sources[key]);
-      }
-      return tempObj;
-    case('array'):
-      var tempArr = [devClientPath];
-      for(var i=0; i<sources.length; i++) {
-        tempArr.push(sources[i]);
-      }
-      return tempArr;
-    case('string'):
-      var tempArrStr = [devClientPath];
-      tempArrStr.push(sources);
-      return tempArrStr;
-    default:
-      return sources;
+  if (isDeploy) return sources;
+
+  var devClientPath = 'webpack-dev-server/client';
+  switch( typeOf(sources) ) {
+  case('object'):
+    var tempObj = {};
+    for(var key in sources) {
+      tempObj[key] = setEntrySources(sources[key]);
     }
+    return tempObj;
+  case('array'):
+    var tempArr = [devClientPath];
+    for(var i=0; i<sources.length; i++) {
+      tempArr.push(sources[i]);
+    }
+    return tempArr;
+  case('string'):
+    var tempArrStr = [devClientPath];
+    tempArrStr.push(sources);
+    return tempArrStr;
+  default:
+    return sources;
   }
-  return sources;
 }

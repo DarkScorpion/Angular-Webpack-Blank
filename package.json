@@ -11,7 +11,11 @@
     "babel-core": "^6.11.4",
     "babel-loader": "^6.2.4",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "css-loader": "^0.25.0",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.3.1"
   },
   "scripts": {
     "dev": "webpack-dev-server",
